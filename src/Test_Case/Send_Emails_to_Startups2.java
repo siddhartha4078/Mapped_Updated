@@ -42,7 +42,7 @@ public class Send_Emails_to_Startups2 {
 	}
 
 	public void Check_total_startup() throws InterruptedException {
-		Thread.sleep(20000);
+		Thread.sleep(10000);
 		driver.switchTo().frame(0);
 		Thread.sleep(3000);
 		WebElement ele = driver.findElement(By.xpath("//div[@style=\"color:#e64c3c\"]"));
@@ -53,7 +53,7 @@ public class Send_Emails_to_Startups2 {
 
 	public void navigate() throws InterruptedException {
 
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		driver.findElement(By.xpath("//*[contains(text(),'Startups')]")).click();
 		Thread.sleep(3000);
 
@@ -156,22 +156,21 @@ public class Send_Emails_to_Startups2 {
 	}
 
 	public void select_startup() throws InterruptedException {
+		int scroll = 25;
 
 		if (i == 1) {
 			navigate();
+			Thread.sleep(2000);
 			scroll_click_startup();
-		}
-
-		else if (i % 3 == 0) {
-
-			scroll_click_startup();
-
 		}
 
 		else {
 
 			driver.switchTo().frame(0);
-			Thread.sleep(2000);
+			WebElement ele = driver.findElement(By.cssSelector("#places-list"));
+			jse.executeScript("arguments[0].scrollTop = arguments[1];", ele, scroll * i);
+			Thread.sleep(3000);
+	
 
 			scroll_click_startup();
 		}
@@ -196,29 +195,14 @@ public class Send_Emails_to_Startups2 {
 
 	public void Send_Email_to_all_Startups() throws InterruptedException {
 
-		int scroll = 50;
+		
 
 		Check_total_startup();
 
 		for (i = 1; i < statups_no; i++) {
+			
+			select_startup();
 
-			if (i > 3) {
-
-				driver.switchTo().frame(0);
-				Thread.sleep(3000);
-
-				WebElement ele = driver.findElement(By.cssSelector("#places-list"));
-				jse.executeScript("arguments[0].scrollTop = arguments[1];", ele, scroll * i);
-				Thread.sleep(3000);
-				select_startup();
-
-			}
-
-			else {
-
-				select_startup();
-
-			}
 
 		}
 
