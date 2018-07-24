@@ -160,7 +160,7 @@ public class Send_Emails_to_Startups2 {
 
 		if (i == 1) {
 			navigate();
-			Thread.sleep(2000);
+			
 			scroll_click_startup();
 		}
 
